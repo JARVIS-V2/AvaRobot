@@ -115,91 +115,44 @@ FAKER_LOCALES = {
     "zw": "en_ZW"
 }
 
-
-
-def get_fallback_detail(detail_type):
-    """ Generate a fallback detail if Faker doesn't provide it. """
-    if detail_type == "state":
-        return "N/A"
-    elif detail_type == "street_address":
-        return "123 Default St"
-    elif detail_type == "city":
-        return "Default City"
-    elif detail_type == "pincode":
-        return "00000"
-    elif detail_type == "country":
-        return "Unknown Country"
-    elif detail_type == "mobile_number":
-        return f"+0000000000"
-    elif detail_type == "email":
-        return f"{random.choice(['example', 'user', 'contact'])}@{random.choice(['yahoo.com', 'gmail.com', 'outlook.com'])}"
-    return "N/A"
-
 def generate_fake_address(country_code="us"):
     fake_locale = FAKER_LOCALES.get(country_code, "en_US")
     fake = Faker(locale=fake_locale)
-    country_info = COUNTRY_CODES.get(country_code, ("Unknown Country", ""))
+    country_name = COUNTRY_CODES.get(country_code, "Unknown Country")
 
-    # List of popular email domains to replace 'example' domains
-    popular_email_domains = ["yahoo.com", "gmail.com", "outlook.com"]
+    # Fallback values
+    state = getattr(fake, 'state', lambda: "N/A")()
+    province = getattr(fake, 'province', lambda: "N/A")()
+    region = getattr(fake, 'region', lambda: "N/A")()
+    formatted_state = next((x for x in [state, province, region] if x != "N/A"), "N/A")
 
-    # Generate fake details
-    try:
-        street_address = fake.street_address()
-    except AttributeError:
-        street_address = get_fallback_detail("street_address")
+    city = getattr(fake, 'city', lambda: "N/A")()
+    town = getattr(fake, 'town', lambda: "N/A")()
+    village = getattr(fake, 'village', lambda: "N/A")()
+    formatted_city = next((x for x in [city, town, village] if x != "N/A"), "N/A")
 
-    try:
-        city = fake.city()
-    except AttributeError:
-        city = get_fallback_detail("city")
-
-    try:
-        state = fake.state()
-    except AttributeError:
-        state = get_fallback_detail("state")
-
-    try:
-        pincode = fake.postcode()
-    except AttributeError:
-        pincode = get_fallback_detail("pincode")
-
-    country_name = COUNTRY_CODES.get(country_code, get_fallback_detail("country"))
-
-    try:
-        mobile_number = f"+{fake.phone_number()}"
-    except AttributeError:
-        mobile_number = get_fallback_detail("mobile_number")
-
-    # Generate a fake email and replace 'example' domains with popular email domains
-    email = fake.email()
+    street_address = getattr(fake, 'street_address', lambda: "N/A")()
+    postcode = getattr(fake, 'postcode', lambda: "N/A")()
+    email = getattr(fake, 'email', lambda: "N/A")()
     if "example" in email:
-        new_domain = random.choice(popular_email_domains)
-        email = email.replace("example.com", new_domain).replace("example.org", new_domain).replace("example.net", new_domain).lower()
-
-    # Use fallback if email is still from 'example' domains
-    if "example" in email:
-        email = get_fallback_detail("email")
+        email = email.replace("example.com", random.choice(["yahoo.com", "gmail.com", "outlook.com"]))\
+                     .replace("example.org", random.choice(["yahoo.com", "gmail.com", "outlook.com"]))\
+                     .replace("example.net", random.choice(["yahoo.com", "gmail.com", "outlook.com"])).lower()
 
     return {
         "Name": fake.name(),
         "Gender": fake.random_element(elements=('Male', 'Female')),
         "Street Address": street_address,
-        "City": city,
-        "State": state,
-        "Pincode": pincode,
+        "City/Town/Village": formatted_city,
+        "State/Province/Region": formatted_state,
+        "Pincode": postcode,
         "Country": country_name,
-        "Mobile Number": mobile_number,
+        "Mobile Number": f"+{fake.phone_number()}",
         "Email": email,
     }
 
 def format_address_details(address_details):
-    country = address_details.get("Country", "Unknown Country")
-    response = [
-        f"**{country} Address Generated** ✅",
-        "", 
-        "▰▰▰▰▰▰▰▰▰▰▰▰▰"
-    ]
+    response = [f"**{address_details['Country']} Address Generated** ✅", "", "▰▰▰▰▰▰▰▰▰▰▰▰▰"]
     for key, value in address_details.items():
         response.append(f"•➥ **{key}**: `{value}`")
     return "\n".join(response)
