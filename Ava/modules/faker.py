@@ -115,44 +115,59 @@ FAKER_LOCALES = {
     "zw": "en_ZW"
 }
 
+
+
 def generate_fake_address(country_code="us"):
     fake_locale = FAKER_LOCALES.get(country_code, "en_US")
     fake = Faker(locale=fake_locale)
-    country_name = COUNTRY_CODES.get(country_code, "Unknown Country")
-    
+    country_info = COUNTRY_CODES.get(country_code, ("Unknown Country", ""))
+
+    # List of popular email domains to replace 'example' domains
+    popular_email_domains = ["yahoo.com", "gmail.com", "outlook.com"]
+
     # Generate fake details
-    mobile_number = fake.phone_number()
-    
-    # Generate a fake email and replace the domain with 'yahoo.com'
-    email = fake.email().replace("example.com", "yahoo.com").lower()
-    
+    country_name = country_info
+    mobile_number = f"+{fake.phone_number()}"
+
+    # Use try-except to handle missing attributes
+    try:
+        state = fake.state()
+    except AttributeError:
+        state = "N/A"
+
+    # Generate a fake email and replace 'example' domains with popular email domains
+    email = fake.email()
+    if "example" in email:
+        new_domain = random.choice(popular_email_domains)
+        email = email.replace("example.com", new_domain).replace("example.org", new_domain).replace("example.net", new_domain).lower()
+
     return {
         "Name": fake.name(),
         "Gender": fake.random_element(elements=('Male', 'Female')),
         "Street Address": fake.street_address(),
         "City": fake.city(),
-        "State": fake.state(),
+        "State": state,
         "Pincode": fake.postcode(),
         "Country": country_name,
         "Mobile Number": mobile_number,
         "Email": email,
     }
 
-def format_passport_details(passport_details):
-    country = passport_details.get("Country", "Unknown Country")
+def format_address_details(address_details):
+    country = address_details.get("Country", "Unknown Country")
     response = [
         f"**{country} Address Generated** ✅",
         "", 
         "▰▰▰▰▰▰▰▰▰▰▰▰▰"
     ]
-    for key, value in passport_details.items():
+    for key, value in address_details.items():
         response.append(f"•➥ **{key}**: `{value}`")
     return "\n".join(response)
 
 @app.on_message(filters.command(["fake"], prefixes=[".", "/"]))
-async def send_fake_passport_details(client, message):
+async def send_fake_address_details(client, message):
     command_text = message.text.split()
     country_code = command_text[1] if len(command_text) > 1 and command_text[1] in COUNTRY_CODES else "us"
-    passport_details = generate_fake_address(country_code)
-    formatted_details = format_passport_details(passport_details)
+    address_details = generate_fake_address(country_code)
+    formatted_details = format_address_details(address_details)
     await client.send_message(message.chat.id, formatted_details)
