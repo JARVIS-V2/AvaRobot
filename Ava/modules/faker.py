@@ -117,6 +117,14 @@ FAKER_LOCALES = {
 
 
 
+def get_fallback_detail(detail_type):
+    if detail_type == "state":
+        return "N/A"
+    elif detail_type == "email":
+        return f"{random.choice(['example', 'user', 'contact'])}@{random.choice(['yahoo.com', 'gmail.com', 'outlook.com'])}"
+    # Add more fallback cases as needed
+    return "N/A"
+
 def generate_fake_address(country_code="us"):
     fake_locale = FAKER_LOCALES.get(country_code, "en_US")
     fake = Faker(locale=fake_locale)
@@ -133,13 +141,17 @@ def generate_fake_address(country_code="us"):
     try:
         state = fake.state()
     except AttributeError:
-        state = "N/A"
+        state = get_fallback_detail("state")
 
     # Generate a fake email and replace 'example' domains with popular email domains
     email = fake.email()
     if "example" in email:
         new_domain = random.choice(popular_email_domains)
         email = email.replace("example.com", new_domain).replace("example.org", new_domain).replace("example.net", new_domain).lower()
+
+    # Use fallback if email is still from 'example' domains
+    if "example" in email:
+        email = get_fallback_detail("email")
 
     return {
         "Name": fake.name(),
