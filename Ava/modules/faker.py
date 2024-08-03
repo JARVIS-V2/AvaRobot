@@ -118,11 +118,21 @@ FAKER_LOCALES = {
 
 
 def get_fallback_detail(detail_type):
+    """ Generate a fallback detail if Faker doesn't provide it. """
     if detail_type == "state":
         return "N/A"
+    elif detail_type == "street_address":
+        return "123 Default St"
+    elif detail_type == "city":
+        return "Default City"
+    elif detail_type == "pincode":
+        return "00000"
+    elif detail_type == "country":
+        return "Unknown Country"
+    elif detail_type == "mobile_number":
+        return f"+0000000000"
     elif detail_type == "email":
         return f"{random.choice(['example', 'user', 'contact'])}@{random.choice(['yahoo.com', 'gmail.com', 'outlook.com'])}"
-    # Add more fallback cases as needed
     return "N/A"
 
 def generate_fake_address(country_code="us"):
@@ -134,14 +144,32 @@ def generate_fake_address(country_code="us"):
     popular_email_domains = ["yahoo.com", "gmail.com", "outlook.com"]
 
     # Generate fake details
-    country_name = country_info
-    mobile_number = f"+{fake.phone_number()}"
+    try:
+        street_address = fake.street_address()
+    except AttributeError:
+        street_address = get_fallback_detail("street_address")
 
-    # Use try-except to handle missing attributes
+    try:
+        city = fake.city()
+    except AttributeError:
+        city = get_fallback_detail("city")
+
     try:
         state = fake.state()
     except AttributeError:
         state = get_fallback_detail("state")
+
+    try:
+        pincode = fake.postcode()
+    except AttributeError:
+        pincode = get_fallback_detail("pincode")
+
+    country_name = COUNTRY_CODES.get(country_code, get_fallback_detail("country"))
+
+    try:
+        mobile_number = f"+{fake.phone_number()}"
+    except AttributeError:
+        mobile_number = get_fallback_detail("mobile_number")
 
     # Generate a fake email and replace 'example' domains with popular email domains
     email = fake.email()
@@ -156,10 +184,10 @@ def generate_fake_address(country_code="us"):
     return {
         "Name": fake.name(),
         "Gender": fake.random_element(elements=('Male', 'Female')),
-        "Street Address": fake.street_address(),
-        "City": fake.city(),
+        "Street Address": street_address,
+        "City": city,
         "State": state,
-        "Pincode": fake.postcode(),
+        "Pincode": pincode,
         "Country": country_name,
         "Mobile Number": mobile_number,
         "Email": email,
