@@ -6,8 +6,6 @@ from Ava import Jarvis as app
 # Initialize Faker
 fake = Faker()
 
-# Generate a mapping of country codes to country names
-COUNTRY_CODES = {code: name for code, name in fake.locales.items()}
 
 def get_faker_locale(country_code):
     # Get Faker locale based on country code or default to 'en_US'
