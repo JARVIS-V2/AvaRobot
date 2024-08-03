@@ -125,7 +125,7 @@ def generate_fake_passport(country_code="us"):
     mobile_number = f"{country_phone_code} {fake.phone_number()}"
     
     # Generate a fake email and replace the domain with 'yahoo.com'
-    email = fake.email().replace("example.com", "yahoo.com").upper()
+    email = fake.email().replace("example.com", "yahoo.com").lower()
     
     return {
         "Name": fake.name(),
