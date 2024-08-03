@@ -115,14 +115,13 @@ FAKER_LOCALES = {
     "zw": "en_ZW"
 }
 
-def generate_fake_passport(country_code="us"):
+def generate_fake_address(country_code="us"):
     fake_locale = FAKER_LOCALES.get(country_code, "en_US")
     fake = Faker(locale=fake_locale)
-    country_info = COUNTRY_CODES.get(country_code, ("Unknown Country", ""))
+    country_name = COUNTRY_CODES.get(country_code, "Unknown Country")
     
     # Generate fake details
-    country_name, country_phone_code = country_info
-    mobile_number = f"{country_phone_code} {fake.phone_number()}"
+    mobile_number = fake.phone_number()
     
     # Generate a fake email and replace the domain with 'yahoo.com'
     email = fake.email().replace("example.com", "yahoo.com").lower()
@@ -154,6 +153,6 @@ def format_passport_details(passport_details):
 async def send_fake_passport_details(client, message):
     command_text = message.text.split()
     country_code = command_text[1] if len(command_text) > 1 and command_text[1] in COUNTRY_CODES else "us"
-    passport_details = generate_fake_passport(country_code)
+    passport_details = generate_fake_address(country_code)
     formatted_details = format_passport_details(passport_details)
     await client.send_message(message.chat.id, formatted_details)
