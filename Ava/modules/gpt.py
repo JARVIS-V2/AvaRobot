@@ -6,7 +6,7 @@ from gtts import gTTS
 import requests
 from pyrogram import filters
 from pyrogram.enums import ChatAction, ParseMode
-from Ava import Jarvis app
+from Ava import Jarvis as app
 import g4f
 from langdetect import detect
 from googletrans import Translator
@@ -18,7 +18,6 @@ translator = Translator()
 def ensure_english(text):
     try:
         lang = detect(text)
-        # Check if the language is Chinese (Simplified or Traditional)
         if lang.startswith('zh'):
             return translator.translate(text, dest='en').text
     except Exception as e:
@@ -40,13 +39,13 @@ async def chat_arvis(app, message):
                 messages=[{"role": "user", "content": query}],
                 temperature=0.2
             )
-            response_text = response  # Update this based on the actual response structure
+            response_text = response
             response_text = ensure_english(response_text)
             await message.reply_text(response_text)
     except Exception as e:
         await message.reply_text(f"An error occurred: {e}")
 
-@app.on_message(filters.command(["chatgpt", "ai", "ask", "Master"], prefixes=["+", ".", "/", "-", "?", "$", "#", "&"]))
+@app.on_message(filters.command(["chatgpt", "ai", "ask"], prefixes=["+", ".", "/", "-", "?", "$", "#", "&"]))
 async def chat_gpt(app, message):
     try:
         await app.send_chat_action(message.chat.id, ChatAction.TYPING)
@@ -61,7 +60,7 @@ async def chat_gpt(app, message):
                 messages=[{"role": "user", "content": query}],
                 temperature=0.2
             )
-            response_text = response  # Update this based on the actual response structure
+            response_text = response
             response_text = ensure_english(response_text)
             await message.reply_text(response_text)
     except Exception as e:
@@ -73,7 +72,7 @@ async def chat_annie(app, message):
         await app.send_chat_action(message.chat.id, ChatAction.TYPING)
         name = message.from_user.first_name
         if len(message.command) < 2:
-            await message.reply_text(f"Hello {name}, I am Siri. How can I help you today?")
+            await message.reply_text(f"Hello {name}, I am ANNIE. How can I help you today?")
         else:
             query = message.text.split(' ', 1)[1]
             MODEL = "gpt-3.5-turbo"
@@ -82,7 +81,7 @@ async def chat_annie(app, message):
                 messages=[{"role": "user", "content": query}],
                 temperature=0.2
             )
-            response_text = response  # Update this based on the actual response structure
+            response_text = response
             response_text = ensure_english(response_text)
             tts = gTTS(response_text, lang='en')
             tts.save('siri.mp3')
