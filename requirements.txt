@@ -23,7 +23,7 @@ g4f
 httpx==0.27.0
 lexica-api
 langdetect
-markdown2==2.5.1
+markdown2==2.5.3
 multicolorcaptcha==1.2.0
 Pillow>=10.2.0
 psutil==5.9.8
