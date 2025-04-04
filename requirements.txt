@@ -16,7 +16,7 @@ emoji==1.7.0
 faker
 feedparser==6.0.10
 ffmpeg-python==0.2.0
-future==0.18.3
+future==1.0.0
 gitpython==3.1.43
 geopy
 g4f
