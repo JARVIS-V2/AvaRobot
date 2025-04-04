@@ -803,7 +803,7 @@ def video(update: Update, context: CallbackContext):
         )
 
 
-Credit = "doraemon890"
+Credit = "CertifiedCoders"
 
 
 @uvbot(pattern="^/mmf ?(.*)")
@@ -827,7 +827,7 @@ async def handler(event):
 
     msg = await event.reply("👻")
 
-    if "doraemon890" not in Credit:
+    if "CertifiedCoders" not in Credit:
         await event.reply("ᴛʜɪs ɴɪɢɢᴀ ʀᴇᴍᴏᴠᴇᴅ ᴄʀᴇᴅɪᴛ ʟɪɴᴇ ғʀᴏᴍ ᴄᴏᴅᴇ 😶")
 
     text = str(event.pattern_match.group(1)).strip()

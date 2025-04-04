@@ -75,7 +75,7 @@ def Jarvis_about_callback(update, context):
                             text="sᴜᴘᴘᴏʀᴛ", url=f"t.me/{SUPPORT_CHAT}"
                         ),
                         InlineKeyboardButton(
-                            text="ᴜᴘᴅᴀᴛᴇs", url="https://t.me/JARVIS_V_SUPPORT"
+                            text="ᴜᴘᴅᴀᴛᴇs", url="https://t.me/CertifiedNetwork"
                         ),
                     ],
                     [
@@ -83,7 +83,7 @@ def Jarvis_about_callback(update, context):
                             text="ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id={OWNER_ID}"
                         ),
                         InlineKeyboardButton(
-                            text="ɢɪᴛʜᴜʙ", url="https://github.com/doraemon890",
+                            text="ɢɪᴛʜᴜʙ", url="https://github.com/CertifiedCoders",
                         ),
                     ],
                     [
@@ -108,16 +108,16 @@ def Source_about_callback(update, context):
 [ᴩʏᴛʜᴏɴ-ᴛᴇʟᴇɢʀᴀᴍ-ʙᴏᴛ](https://github.com/python-telegram-bot/python-telegram-bot)
 ᴀɴᴅ ᴜsɪɴɢ [sǫʟᴀʟᴄʜᴇᴍʏ](https://www.sqlalchemy.org) ᴀɴᴅ [ᴍᴏɴɢᴏ](https://cloud.mongodb.com) ᴀs ᴅᴀᴛᴀʙᴀsᴇs.
 
-*ʜᴇʀᴇ ɪs ᴍʏ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ:* [{BOT_NAME}](https://github.com/doraemon890/AvaRobot)
+*ʜᴇʀᴇ ɪs ᴍʏ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ:* [{BOT_NAME}](https://github.com/CertifiedCoders/AvaRobot)
 
-{BOT_NAME} ɪs ʟɪᴄᴇɴsᴇᴅ ᴜɴᴅᴇʀ ᴛʜᴇ [ᴍɪᴛ ʟɪᴄᴇɴsᴇ](https://github.com/doraemon890/AvaRobot/blob/master/LICENSE).
+{BOT_NAME} ɪs ʟɪᴄᴇɴsᴇᴅ ᴜɴᴅᴇʀ ᴛʜᴇ [ᴍɪᴛ ʟɪᴄᴇɴsᴇ](https://github.com/CertifiedCoders/AvaRobot/blob/master/LICENSE).
 © 2022 - 2023 [sᴜᴘᴘᴏʀᴛ](https://t.me/{SUPPORT_CHAT}) ᴄʜᴀᴛ, ᴀʟʟ ʀɪɢʜᴛs ʀᴇsᴇʀᴠᴇᴅ.
 """,
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ꜱᴏᴜʀᴄᴇ", url="https://github.com/doraemon890/AvaRobot"),
+                        InlineKeyboardButton(text="ꜱᴏᴜʀᴄᴇ", url="https://github.com/CertifiedCoders/AvaRobot"),
                     ],
                     [
                         InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ", callback_data="Jarvis_"),

@@ -12,8 +12,8 @@
  
                             𝗗𝗘𝗣𝗟𝗢𝗬𝗠𝗘𝗡𝗧 𝗠𝗘𝗧𝗛𝗢𝗗𝗦
 
-<img align="right" height="200px" width="200px" alt="𝙶𝙸𝙵" src="https://github.com/doraemon890/doraemon890/blob/main/Robo.webp"/>
-<img align="left" height="200px" width="200px" alt="𝙶𝙸𝙵" src="https://github.com/doraemon890/doraemon890/blob/main/Robo.webp"/>      
+<img align="right" height="200px" width="200px" alt="𝙶𝙸𝙵" src="https://github.com/CertifiedCoders/CertifiedCoders/blob/main/Robo.webp"/>
+<img align="left" height="200px" width="200px" alt="𝙶𝙸𝙵" src="https://github.com/CertifiedCoders/CertifiedCoders/blob/main/Robo.webp"/>      
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 <h3 align="center">
@@ -24,7 +24,7 @@
 - <b>  ᴅᴇᴩʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ </b>
 </h3></summary>
 
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/doraemon890/AvaRobot"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/CertifiedCoders/AvaRobot"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 
 
 </details>
@@ -40,7 +40,7 @@
 - <b>  ᴅᴇᴩʟᴏʏ ᴏɴ ʀᴀɪʟᴡᴀʏ </b>
 </h3></summary>
 
-<p align="center"><a href="https://railway.app/new/template=https://github.com/doraemon890/AvaRobot"> <img src="https://img.shields.io/badge/Deploy%20On%20Railway-black?style=for-the-badge&logo=Railway" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://railway.app/new/template=https://github.com/CertifiedCoders/AvaRobot"> <img src="https://img.shields.io/badge/Deploy%20On%20Railway-black?style=for-the-badge&logo=Railway" width="220" height="38.45"/></a></p>
 
 
 </details>
@@ -69,7 +69,7 @@
 - `sudo apt install python3-pip`
 
 - ᴄʟᴏɴᴇ ᴛʜᴇ ʀᴇᴘᴏsɪᴛᴏʀʏ ʙʏ :
-- `git clone https://github.com/doraemon890/AvaRobot`
+- `git clone https://github.com/CertifiedCoders/AvaRobot`
 
 - ᴇɴᴛᴇʀ ɪɴ ʀᴇᴘᴏ
 - `cd AvaRobot`
@@ -127,7 +127,7 @@ OWNER_ID =  sᴛᴀʀᴛ @Ava_Robot & ᴛʏᴘᴇ /id
 
 
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/_rajnish_mishra____) 
-[![Telegram](https://img.shields.io/badge/Telegram-%232671E5.svg?logo=Telegram&logoColor=white)](https://t.me/JARVIS_V_SUPPORT) 
+[![Telegram](https://img.shields.io/badge/Telegram-%232671E5.svg?logo=Telegram&logoColor=white)](https://t.me/CertifiedNetwork) 
 [![Gmail](https://img.shields.io/badge/Gmail-%23F05033.svg?logo=Gmail&logoColor=white)](https://mail.google.com/mail/?view=cm&fs=1&to=hackerdoraemon2@gmail.com) 
 [![YouTube](https://img.shields.io/badge/Youtube-%23DD0031.svg?logo=Youtube&logoColor=white)](https://youtube.com/@rajnisha3) 
 

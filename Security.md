@@ -16,9 +16,9 @@
 ᴀɴᴅ ᴛʜᴇɴ ᴍᴀᴋᴇ ᴀ ɪssᴜᴇ ɪɴ ᴏᴜʀ ᴘʀᴏᴊᴇᴄᴛ.
 
 ## ᴀᴠᴀ ʀᴏʙᴏᴛ ᴏᴡɴᴇʀ
-- [ɢɪᴛʜᴜʙ](https://github.com/doraemon890)
+- [ɢɪᴛʜᴜʙ](https://github.com/CertifiedCoders)
 - [ᴛᴇʟᴇɢʀᴀᴍ](https://t.me/JARVIS_V2)
-- [ sᴜᴘᴘᴏʀᴛ](https://t.me/JARVIS_V_SUPPORT)
+- [ sᴜᴘᴘᴏʀᴛ](https://t.me/CertifiedNetwork)
 
 ## ɪɴғᴏ 
 ᴛʜɪs ɪs ᴀᴠᴀ ʀᴏʙᴏᴛ ,ᴏᴩᴇɴ sᴏᴜʀᴄᴇ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴩ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.
@@ -28,9 +28,9 @@
 [ᴩʏᴛʜᴏɴ-ᴛᴇʟᴇɢʀᴀᴍ-ʙᴏᴛ](https://github.com/python-telegram-bot/python-telegram-bot), 
 ᴀɴᴅ ᴜsɪɴɢ [sǫʟᴀʟᴄʜᴇᴍʏ](https://www.sqlalchemy.org) ᴀɴᴅ [ᴍᴏɴɢᴏ](https://cloud.mongodb.com) ᴀs ᴅᴀᴛᴀʙᴀsᴇ.
 
-ʜᴇʀᴇ ɪs ᴍʏ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ : [ɢɪᴛʜᴜʙ-ʟɪɴᴋ](https://github.com/doraemon890/AvaRobot)
+ʜᴇʀᴇ ɪs ᴍʏ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ : [ɢɪᴛʜᴜʙ-ʟɪɴᴋ](https://github.com/CertifiedCoders/AvaRobot)
 
 
-ᴀᴠᴀ ʀᴏʙᴏᴛ ɪs ʟɪᴄᴇɴsᴇᴅ ᴜɴᴅᴇʀ ᴛʜᴇ [ᴍɪᴛ ʟɪᴄᴇɴsᴇ](https://github.com/doraemon890/AvaRobot/blob/master/LICENSE).
+ᴀᴠᴀ ʀᴏʙᴏᴛ ɪs ʟɪᴄᴇɴsᴇᴅ ᴜɴᴅᴇʀ ᴛʜᴇ [ᴍɪᴛ ʟɪᴄᴇɴsᴇ](https://github.com/CertifiedCoders/AvaRobot/blob/master/LICENSE).
 
-© 2024 - 2025 [ᴊᴀʀᴠɪs](https://t.me/JARVIS_V_SUPPORT), ᴀʟʟ ʀɪɢʜᴛs ʀᴇsᴇʀᴠᴇᴅ
+© 2024 - 2025 [ᴊᴀʀᴠɪs](https://t.me/CertifiedNetwork), ᴀʟʟ ʀɪɢʜᴛs ʀᴇsᴇʀᴠᴇᴅ

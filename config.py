@@ -16,7 +16,7 @@ class Config(object):
     TOKEN = getenv("TOKEN")
     OWNER_ID = int(getenv("OWNER_ID", 5938660179))
     OWNER_USERNAME = getenv("OWNER_USERNAME", "JARVIS_V2")
-    SUPPORT_CHAT = getenv("SUPPORT_CHAT", "Dora_Hub")
+    SUPPORT_CHAT = getenv("SUPPORT_CHAT", "CertifiedCoders")
     LOGGER_ID = int(getenv("LOGGER_ID", "-1002014167331"))
     MONGO_URI = getenv("MONGO_DB_URI")
     DB_NAME = getenv("DB_NAME", "AvaRobot")

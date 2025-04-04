@@ -214,7 +214,7 @@ def info(update: Update, context: CallbackContext):
         if spamwtc := sw.get_ban(int(user.id)):
             text += "\n\n<b>ᴛʜɪs ᴘᴇʀsᴏɴ ɪs sᴘᴀᴍᴡᴀᴛᴄʜᴇᴅ!</b>"
             text += f"\nʀᴇᴀꜱᴏɴ: <pre>{spamwtc.reason}</pre>"
-            text += "\nᴀᴘᴘᴇᴀʟ ᴀᴛ [sᴜᴘᴘᴏʀᴛ](https://t.me/Dora_Hub)"
+            text += "\nᴀᴘᴘᴇᴀʟ ᴀᴛ [sᴜᴘᴘᴏʀᴛ](https://t.me/CertifiedCoders)"
     except Exception:
         pass  # don't crash if api is down somehow...
 
@@ -355,8 +355,8 @@ def stats(update, context):
             status
             + "\n*ʙᴏᴛ sᴛᴀᴛsɪsᴛɪᴄs*:\n"
             + "\n".join([mod.__stats__() for mod in STATS])
-            + "\n\n[ɢɪᴛʜᴜʙ](https://github.com/doraemon890/AvaRobot)\n\n "
-            + "🥀ʙʏ [ᴊᴀʀᴠɪs](github.com/doraemon890)\n",
+            + "\n\n[ɢɪᴛʜᴜʙ](https://github.com/CertifiedCoders/AvaRobot)\n\n "
+            + "🥀ʙʏ [ᴊᴀʀᴠɪs](github.com/CertifiedCoders)\n",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(kb),
             disable_web_page_preview=True,
@@ -369,9 +369,9 @@ def stats(update, context):
                         "\n*ʙᴏᴛ sᴛᴀᴛsɪsᴛɪᴄs*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + "\n\n[ɢɪᴛʜᴜʙ](https://github.com/doraemon890/AvaRobot)\n\n"
+                    + "\n\n[ɢɪᴛʜᴜʙ](https://github.com/CertifiedCoders/AvaRobot)\n\n"
                 )
-                + "🥀ʙʏ [ᴊᴀʀᴠɪs](github.com/doraemon890)\n"
+                + "🥀ʙʏ [ᴊᴀʀᴠɪs](github.com/CertifiedCoders)\n"
             ),
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(kb),

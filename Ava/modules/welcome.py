@@ -20,7 +20,7 @@ from telegram.utils.helpers import escape_markdown, mention_html, mention_markdo
 import Ava.modules.sql.log_channel_sql as logsql
 import Ava.modules.sql.welcome_sql as sql
 from Ava import DEMONS, DEV_USERS, DRAGONS, LOGGER, OWNER_ID, EVENT_LOGS
-from Ava import SUPPORT_CHAT as Dora_Hub
+from Ava import SUPPORT_CHAT as CertifiedCoders
 from Ava import WOLVES, dispatcher, sw
 from Ava.modules.helper_funcs.anonymous import AdminPerms, user_admin
 from Ava.modules.helper_funcs.chat_status import is_user_ban_protected
@@ -242,7 +242,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 )
                 # Send a welcome message to the chat
                 update.effective_message.reply_text(
-                    f"ᴛʜᴀɴᴋꜱ ꜰᴏʀ ᴀᴅᴅɪɴɢ ᴍᴇ! ᴊᴏɪɴ @{Dora_Hub} ꜰᴏʀ ꜱᴜᴘᴘᴏʀᴛ.",
+                    f"ᴛʜᴀɴᴋꜱ ꜰᴏʀ ᴀᴅᴅɪɴɢ ᴍᴇ! ᴊᴏɪɴ @{CertifiedCoders} ꜰᴏʀ ꜱᴜᴘᴘᴏʀᴛ.",
                     reply_to_message_id=reply,
                 )
                 continue
