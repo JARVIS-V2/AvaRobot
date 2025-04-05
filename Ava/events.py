@@ -1,5 +1,4 @@
 from telethon import events
-import bs4  
 from Ava import telethn
 
 
