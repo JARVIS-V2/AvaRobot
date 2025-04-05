@@ -31,7 +31,7 @@
 ### 🐳 Deploy with Docker
 
 ```bash
-git clone https://github.com/doraemo890/AvaRobot
+git clone https://github.com/JARVIS-V2/AvaRobot
 cd AvaRobot
 cp sample.env .env
 docker-compose up --build -d
@@ -59,7 +59,7 @@ okteto pipeline deploy --name AvaRobot
 sudo apt update && sudo apt install -y git python3 python3-venv python3-pip
 
 # 2. Clone the repo
-git clone https://github.com/doraemo890/AvaRobot.git
+git clone https://github.com/JARVIS-V2/AvaRobot.git
 cd AvaRobot
 
 # 3. Create virtual environment
@@ -111,5 +111,5 @@ This project is licensed under the MIT License.
 
 ## 🧑‍💻 Credits
 
-Made with ❤️ by [@doraemo890](https://github.com/doraemo890) and contributors.
+Made with ❤️ by [@JARVIS-V2](https://github.com/JARVIS-V2) and contributors.
 
