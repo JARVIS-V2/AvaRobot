@@ -1,3 +1,5 @@
-icon: https://img.shields.io/github/v/release/doraemo890/AvaRobot?color=black&logo=github&logoColor=black&style=social
+name: AvaRobot
+icon: https://img.shields.io/github/v/release/JARVIS-V2/AvaRobot?color=black&logo=github&logoColor=black&style=social
+
 deploy:
-    - okteto stack deploy --build -f docker-compose.yml
+  - okteto stack deploy --build -f docker-compose.yml
