@@ -46,7 +46,7 @@ tgcrypto-pyrofork
 pyrofork
 python-whois
 python-arq==6.0.7
-python-dotenv==1.0.1
+python-dotenv==1.1.0
 ffmpeg-python==0.2.0
 redis==5.2.0
 telegraph==2.2.0
