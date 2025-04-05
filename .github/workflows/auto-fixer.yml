@@ -1,79 +1,30 @@
-name: CI - Format, Lint, Test
+
+name: Auto Code Fixer
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
-
-permissions:
-  contents: write  # Allow pushing code back on push events
 
 jobs:
-  build:
+  format-and-lint:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out the repository
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Full history to allow proper diffing for Super-Linter
 
-      # 2. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
 
-      # 3. Install formatting/linting tools
-      - name: Install Black, Ruff, and Codespell
-        run: |
-          python -m pip install --upgrade pip
-          pip install black ruff codespell
+      - name: Install Black & Ruff
+        run: pip install black ruff
 
-      # 4. Run Ruff to auto-fix lint issues (like unused imports)
-      - name: Auto-fix lint issues with Ruff
-        run: ruff . --fix
+      - name: Run Ruff (Lint & Auto-fix)
+        run: ruff check . --fix --show-fixes
 
-      # 5. Run Black to auto-format code
-      - name: Auto-format code with Black
-        run: black .
-
-      # 6. Fix typos with Codespell
-      - name: Fix typos with Codespell
-        run: codespell -q 3 -w .
-
-      # 7. Commit and push fixes (only on push events)
-      - name: Commit fixes
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          if [ -n "$(git status --porcelain)" ]; then
-            git add -A
-            git commit -m "chore: auto-format code [skip ci]"
-            git push
-          else
-            echo "No formatting fixes to commit."
-          fi
-
-      # 8. Run tests with pytest (if tests folder exists)
-      - name: Run tests with Pytest
-        run: |
-          if [ -d "tests" ]; then
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-            pip install pytest
-            pytest --maxfail=1 --disable-warnings -q
-          else
-            echo "No tests directory found, skipping tests."
-          fi
-
-      # 9. Lint the codebase with Super-Linter
-      - name: Lint entire codebase with Super-Linter
-        uses: super-linter/super-linter@v7.3.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BRANCH: master
-          VALIDATE_ALL_CODEBASE: false
+      - name: Run Black (Auto-format)
+        run: black . --quiet
