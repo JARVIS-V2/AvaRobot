@@ -1,0 +1,31 @@
+[MASTER]
+ignore=venv,.venv,env,__pycache__,build,dist
+jobs=1
+load-plugins=pylint.extensions.mccabe
+
+[MESSAGES CONTROL]
+disable=
+    C0114, # missing-module-docstring
+    C0115, # missing-class-docstring
+    C0116, # missing-function-docstring
+    R0903, # too-few-public-methods
+    R0902, # too-many-instance-attributes
+    R0913, # too-many-arguments
+    R0914, # too-many-locals
+    W0511, # TODO comments
+
+[FORMAT]
+max-line-length=200
+
+[DESIGN]
+max-args=10
+max-attributes=10
+max-locals=20
+
+[REPORTS]
+output-format=colorized
+reports=yes
+score=yes
+
+[TYPECHECK]
+generated-members=numpy.*,cv2.*,torch.*,telegram.*,pyrogram.*,sqlalchemy.*
