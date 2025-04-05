@@ -9,6 +9,8 @@ from inspect import getfullargspec
 from os import environ
 from sys import exit as sysexit
 from traceback import format_exc
+from os import environ
+from os import environ
 
 import spamwatch
 import telegram.ext as tg
