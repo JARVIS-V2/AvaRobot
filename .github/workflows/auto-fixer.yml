@@ -1,0 +1,84 @@
+name: CI - Format, Lint, Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: write  # Allow push to repo (used on push events); read-only on PR from forks&#8203;:contentReference[oaicite:13]{index=13}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use GitHub-hosted Linux runner (free for public repos)&#8203;:contentReference[oaicite:14]{index=14}
+    steps:
+      # 1. Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history to allow committing and for Super-Linter diff calculation
+
+      # 2. Set up Python 3.11
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Install formatting/linting tools
+      - name: Install Black, Ruff, and Codespell
+        run: |
+          python -m pip install --upgrade pip
+          pip install black ruff codespell
+
+      # 4. Run Ruff to auto-fix lint issues (unused imports, etc.)
+      - name: Auto-fix lint issues with Ruff
+        run: ruff . --fix
+        # Ruff is configured in pyproject.toml (fix = true, rules E,F,W,I,UP). This removes unused imports, applies isort, etc.&#8203;:contentReference[oaicite:15]{index=15}
+
+      # 5. Run Black to auto-format code
+      - name: Auto-format code with Black
+        run: black .
+        # Black formats the code to PEP8 style (88-line length as per pyproject.toml). No --check means it writes changes.
+
+      # 6. Run Codespell to fix common typos
+      - name: Fix typos with Codespell
+        run: codespell -q 3 -w .
+        # -q 3 for fewer false positives, -w to write changes in place&#8203;:contentReference[oaicite:16]{index=16}
+
+      # 7. Commit and push changes if any (only on push events, not on PRs)
+      - name: Commit fixes
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          # Commit all changes (if any) and push
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore: auto-format code [skip ci]"
+            git push
+          else
+            echo "No formatting fixes to commit."
+          fi
+        # [skip ci] in commit message prevents this push from re-triggering the workflow&#8203;:contentReference[oaicite:17]{index=17}
+
+      # 8. Install dependencies and run tests (if tests exist)
+      - name: Run tests with Pytest
+        run: |
+          if [ -d "tests" ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install pytest
+            pytest --maxfail=1 --disable-warnings -q
+          else
+            echo "No tests directory found, skipping tests."
+          fi
+
+      # 9. Run Super-Linter for final checks (read-only)
+      - name: Lint entire codebase with Super-Linter
+        uses: super-linter/super-linter@v7.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: master
+          VALIDATE_ALL_CODEBASE: false  # only lint changed files for efficiency&#8203;:contentReference[oaicite:18]{index=18}
+          # (Super-Linter runs a broad set of linters; no files will be changed at this step)&#8203;:contentReference[oaicite:19]{index=19}
