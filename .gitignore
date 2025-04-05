@@ -1,163 +1,86 @@
-
-*.session
-*.session-journal
-*.config.py
-.vscode/
-postgres-data/
-*.env
-!sample.env
-logs/
-.idea/
-
-Ava/config.py
-Ava/*.session
-Ava/*.session-journal
-Ava/config.ini
-log.txt
-*.pyc
-.idea/
-.project
-.pydevproject
-.directory
-.vscode
-Ava/modules/helper_funcs/temp.txt
-Ava/elevated_users.json
-start-3.9.bat
-*.session
-kangsticker.png
-venv
-env
-Ava.session-journal
-updates.txt
-*.exe
-
-
-# Byte-compiled / optimized / DLL files
+# Python cache and compiled files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
+# Environment and virtualenvs
 .env
-.venv
+.venv/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
-.spyderproject
-.spyproject
+# IDE/editor files
+.vscode/
+.idea/
+.directory
+.project
+.pydevproject
 
-# Rope project settings
-.ropeproject
+# OS/Editor specific
+.DS_Store
+Thumbs.db
 
-# mkdocs documentation
-/site
+# Telegram bot session and config
+*.session
+*.session-journal
+*.exe
+*.log
+*.ini
+*.bat
+*.env
+!sample.env
+*.config.py
+*.txt
 
-# mypy
+# AvaRobot specific
+Ava/elevated_users.json
+Ava/*.session
+Ava/*.session-journal
+Ava/config.py
+Ava/modules/helper_funcs/temp.txt
+
+# Docker & build
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+docker-compose.yml
+Dockerfile
+
+# PyInstaller
+*.spec
+*.manifest
+
+# Logs
+logs/
+log.txt
+updates.txt
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Test & coverage
+htmlcov/
+.tox/
+.nox/
+.coverage*
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Type checker & linters
 .mypy_cache/
+.pyre/
 .dmypy.json
 dmypy.json
 
-# Pyre type checker
-.pyre/
+# Sphinx / docs
+docs/_build/
+
+# IPython/Jupyter
+.ipynb_checkpoints
