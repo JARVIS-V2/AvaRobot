@@ -43,7 +43,7 @@ class Config(object):
     # 🌐 External APIs (Optional)
     # ==========================
 
-    DEEP_API = getenv("DEEP_API", "")             # Get from https://deepai.org/
+    DEEP_API = getenv("DEEP_API", "")             # Get from https://deepai.org/(Optional)
     ARQ_API_KEY = getenv("ARQ_API_KEY", "")       # Get from https://t.me/ARQRobot
     SPAMWATCH_API = getenv("SPAMWATCH_API", "")   # Get from https://t.me/SpamWatchBot
 
