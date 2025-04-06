@@ -103,8 +103,8 @@ tmux kill-session -t avarobot
 | `LOGGER_ID`      | ✅       | Telegram log group/channel ID                |
 | `MONGO_DB_URI`   | ✅       | MongoDB connection string                    |
 | `DATABASE_URL`   | ✅       | PostgreSQL connection string (if using SQL)  |
-| `ARQ_API_KEY`    | ✅       | From [arq.hamker.dev](https://arq.hamker.dev) |
-| `SPAMWATCH_API`  | ✅       | From [spamwatch.org](https://spamwatch.org)   |
+| `ARQ_API_KEY`    | ✅       | From [ARQ](https://t.me/ARQRobot) |
+| `SPAMWATCH_API`  | ✅       | From [Spam Watchers](https://t.me/SpamWatchBot)   |
 | `OWNER_USERNAME` | 🔹       | Your @username (used in UI, optional)        |
 | `SUPPORT_CHAT`   | 🔹       | Support chat link (used in /help)            |
 | `DEEP_API`       | 🔹       | From [deepai.org](https://deepai.org)        |
