@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# ========== Color Output ==========
 pprint (){
     cred='\033[0;31m'
     cgreen='\033[0;32m'
@@ -18,7 +17,6 @@ pprint (){
     printf "$color$1$creset"
 }
 
-# ========== Yes/No Prompt ==========
 yesnoprompt(){
     old_stty_cfg=$(stty -g)
     stty raw -echo; answer=$(head -c 1)
@@ -26,7 +24,6 @@ yesnoprompt(){
     echo "$answer" | grep -iq "^y"
 }
 
-# ========== Package Update ==========
 update() {
     pprint "\n\nChecking for package updates... " "ccyan"
     sudo apt update 2>&1 | grep "can be upgraded" &>/dev/null
@@ -45,7 +42,6 @@ update() {
     fi
 }
 
-# ========== Required Packages ==========
 packages(){
     pprint "\nChecking required packages...\n" "ccyan"
 
@@ -64,7 +60,6 @@ packages(){
     sudo apt install -y git curl python3-venv &>/dev/null
 }
 
-# ========== Python Requirements ==========
 install_requirements(){
     pprint "\nInstalling Python dependencies...\n" "ccyan"
     pip3 install -U pip &>>pypilog.txt
@@ -72,7 +67,6 @@ install_requirements(){
     pprint "Dependencies installed.\n" "cgreen" || (pprint "FAILED\n" "cred"; exit 1)
 }
 
-# ========== Banner ==========
 display_banner(){
     cmagenta='\033[0;35m'
     creset='\033[0m'
@@ -90,7 +84,6 @@ EOF
     printf "$creset"
 }
 
-# ========== Collect Variables ==========
 collect_env(){
     clear
     display_banner
@@ -112,6 +105,8 @@ collect_env(){
 
     pprint "\nCreating .env file...\n" "ccyan"
 
+    if [ -f .env ]; then rm .env; fi
+
     cat << EOF > .env
 API_ID=$api_id
 API_HASH=$api_hash
@@ -128,27 +123,21 @@ ARQ_API_KEY=$arq_key
 SPAMWATCH_API=$spamwatch_api
 EOF
 
-    pprint "\n✅ Your .env file has been saved!\n" "cgreen"
-    pprint "To add more variables, just edit the .env file manually.\n" "cyellow"
+    clear
+    pprint "\n✅ .env file created successfully!\n" "cgreen"
+    pprint "Edit it any time using: nano .env\n" "ccyan"
+    pprint "\nYou can now start AvaRobot with:\n" "cgreen"
+    pprint "   python3 -m Ava\n\n" "cyellow"
 }
 
 # ========== Start Script ==========
 clear
 display_banner
 pprint "\nWelcome to AvaRobot Setup\n\n" "cgreen"
-pprint "This script needs sudo access for installing packages.\n" "ccyan"
-
-# ✅ Use safe root check
-if [ "$(id -u)" != "0" ]; then
-    pprint "\n❌ Please run this script with sudo or as root.\n" "cred"
-    exit 1
-fi
+pprint "This script needs sudo privileges to install packages.\n" "ccyan"
+sudo test
 
 update
 packages
 install_requirements
 collect_env
-
-pprint "\n🎉 AvaRobot installation is complete!\n" "cgreen"
-pprint "You can now start the bot by running:\n" "ccyan"
-pprint "    python3 -m Ava\n\n" "cyellow"
