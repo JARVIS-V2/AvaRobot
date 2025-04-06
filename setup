@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# ========== Color Printing Utility ==========
-pprint () {
+# ========== Color Output ==========
+pprint (){
     cred='\033[0;31m'
     cgreen='\033[0;32m'
     cyellow='\033[0;33m'
@@ -10,72 +10,98 @@ pprint () {
     ccyan='\033[0;36m'
     creset='\033[0m'
 
-    color="$cmagenta"
-    [[ -n "$2" ]] && eval "color=\$$2"
+    if [ -z "$2" ]; then
+        color="$cmagenta"
+    else
+        eval "color=\$$2"
+    fi
     printf "$color$1$creset"
 }
 
 # ========== Yes/No Prompt ==========
-yesnoprompt() {
+yesnoprompt(){
     old_stty_cfg=$(stty -g)
     stty raw -echo; answer=$(head -c 1)
     stty $old_stty_cfg
     echo "$answer" | grep -iq "^y"
 }
 
-# ========== System Update ==========
+# ========== Package Update ==========
 update() {
-    pprint "\nUpdating packages... " "ccyan"
-    sudo apt update -y &>/dev/null && sudo apt upgrade -y &>/dev/null && \
-    pprint "System updated.\n" "cgreen" || \
-    pprint "Update failed.\n" "cred"
+    pprint "\n\nChecking for package updates... " "ccyan"
+    sudo apt update 2>&1 | grep "can be upgraded" &>/dev/null
+    if [ $? -eq 0 ]; then
+        pprint "UPDATES AVAILABLE\n" "cyellow"
+        pprint "Do you want to upgrade packages automatically? (y/n): " "ccyan"
+        if yesnoprompt; then
+            pprint "\nUpgrading packages... " "ccyan"
+            sudo apt upgrade -y &>/dev/null &&
+            pprint "DONE\n" "cgreen" || (pprint "FAILED\n" "cred"; exit 1)
+        else
+            echo
+        fi
+    else
+        pprint "ALREADY UP TO DATE\n" "cgreen"
+    fi
 }
 
-# ========== Package Installation ==========
-install_dependencies() {
-    pprint "\nInstalling required packages...\n" "ccyan"
-    sudo apt install -y python3 python3-pip ffmpeg git curl &>/dev/null && \
-    pprint "Dependencies installed.\n" "cgreen" || \
-    (pprint "Failed to install packages.\n" "cred"; exit 1)
+# ========== Required Packages ==========
+packages(){
+    pprint "\nChecking required packages...\n" "ccyan"
+
+    if ! command -v pip3 &>/dev/null; then
+        pprint "Installing pip... " "ccyan"
+        sudo apt install python3-pip -y 2>pypilog.txt 1>/dev/null &&
+        pprint "SUCCESS\n" "cgreen" || (pprint "FAIL\n" "cred"; exit 1)
+    fi
+
+    if ! command -v ffmpeg &>/dev/null; then
+        pprint "Installing ffmpeg... " "ccyan"
+        sudo apt install ffmpeg -y &>/dev/null &&
+        pprint "SUCCESS\n" "cgreen" || (pprint "FAIL. Install ffmpeg manually.\n" "cred"; exit 1)
+    fi
+
+    sudo apt install -y git curl python3-venv &>/dev/null
 }
 
 # ========== Python Requirements ==========
-install_python_packages() {
+install_requirements(){
     pprint "\nInstalling Python dependencies...\n" "ccyan"
-    pip3 install -U pip &>/dev/null
-    pip3 install -U -r requirements.txt &>pypilog.txt && \
-    pprint "Python packages installed.\n" "cgreen" || \
-    (pprint "Failed to install Python packages. See pypilog.txt\n" "cred"; exit 1)
+    pip3 install -U pip &>>pypilog.txt
+    pip3 install -U -r requirements.txt &>>pypilog.txt &&
+    pprint "Dependencies installed.\n" "cgreen" || (pprint "FAILED\n" "cred"; exit 1)
 }
 
-# ========== Display Banner ==========
-display_banner() {
+# ========== Banner ==========
+display_banner(){
     cmagenta='\033[0;35m'
     creset='\033[0m'
     printf "$cmagenta"
     cat << "EOF"
 
- █████╗ ██╗   ██╗ █████╗     ██████╗  ██████╗ ██████╗  ██████╗ ████████╗
-██╔══██╗██║   ██║██╔══██╗    ██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗╚══██╔══╝
-███████║██║   ██║███████║    ██████╔╝██║   ██║██████╔╝██║   ██║   ██║   
-██╔══██║╚██╗ ██╔╝██╔══██║    ██╔══██╗██║   ██║██╔══██╗██║   ██║   ██║   
-██║  ██║ ╚████╔╝ ██║  ██║    ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   
-╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   
+     █████╗ ██╗   ██╗ █████╗     ██████╗  ██████╗ ██████╗  ██████╗ ████████╗
+    ██╔══██╗██║   ██║██╔══██╗    ██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗╚══██╔══╝
+    ███████║██║   ██║███████║    ██████╔╝██║   ██║██████╔╝██║   ██║   ██║   
+    ██╔══██║╚██╗ ██╔╝██╔══██║    ██╔══██╗██║   ██║██╔══██╗██║   ██║   ██║   
+    ██║  ██║ ╚████╔╝ ██║  ██║    ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   
+    ╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   
 
 EOF
     printf "$creset"
 }
 
-# ========== Variable Collector ==========
-collect_env_variables() {
-    pprint "\nPlease enter the required values below:\n" "cgreen"
+# ========== Collect Variables ==========
+collect_env(){
+    clear
+    display_banner
+    pprint "\nEnter the required values below:\n\n" "cgreen"
 
     pprint "API ID: " "cyellow"; read api_id
     pprint "API HASH: " "cyellow"; read api_hash
     pprint "BOT TOKEN: " "cyellow"; read token
     pprint "OWNER ID: " "cyellow"; read owner_id
     pprint "OWNER USERNAME (optional): " "cyellow"; read owner_user
-    pprint "SUPPORT CHAT (optional, no @): " "cyellow"; read support_chat
+    pprint "SUPPORT CHAT (optional): " "cyellow"; read support_chat
     pprint "LOGGER GROUP ID: " "cyellow"; read logger_id
     pprint "MONGO DB URI: " "cyellow"; read mongo_uri
     pprint "DB NAME (optional): " "cyellow"; read db_name
@@ -84,7 +110,7 @@ collect_env_variables() {
     pprint "ARQ API KEY: " "cyellow"; read arq_key
     pprint "SPAMWATCH API: " "cyellow"; read spamwatch_api
 
-    pprint "\nWriting to .env file...\n" "ccyan"
+    pprint "\nCreating .env file...\n" "ccyan"
 
     cat << EOF > .env
 API_ID=$api_id
@@ -102,34 +128,27 @@ ARQ_API_KEY=$arq_key
 SPAMWATCH_API=$spamwatch_api
 EOF
 
-    pprint "\n✅ .env file created successfully!\n" "cgreen"
-
-    # ========== .env Validation ==========
-    pprint "\nChecking .env file for required fields...\n" "ccyan"
-    missing_vars=()
-    for var in API_ID API_HASH TOKEN OWNER_ID LOGGER_ID MONGO_DB_URI DATABASE_URL ARQ_API_KEY SPAMWATCH_API; do
-        if ! grep -q "$var=" .env || [ -z "$(grep "$var=" .env | cut -d'=' -f2)" ]; then
-            missing_vars+=("$var")
-        fi
-    done
-
-    if [ ${#missing_vars[@]} -ne 0 ]; then
-        pprint "\n⚠️ Missing required environment variables:\n" "cred"
-        for var in "${missing_vars[@]}"; do
-            pprint "$var\n" "cyellow"
-        done
-        pprint "\nPlease edit the .env file and add the missing values.\n" "cyellow"
-    else
-        pprint "\n✅ All required variables are set. You can now start AvaRobot by running: python3 -m Ava\n" "cgreen"
-    fi
+    pprint "\n✅ Your .env file has been saved!\n" "cgreen"
+    pprint "To add more variables, just edit the .env file manually.\n" "cyellow"
 }
 
-# ========== Execution Begins Here ==========
+# ========== Start Script ==========
 clear
-sudo test || exit 1
-
 display_banner
+pprint "\nWelcome to AvaRobot Setup\n\n" "cgreen"
+pprint "This script needs sudo access for installing packages.\n" "ccyan"
+
+# ✅ Use safe root check
+if [ "$(id -u)" != "0" ]; then
+    pprint "\n❌ Please run this script with sudo or as root.\n" "cred"
+    exit 1
+fi
+
 update
-install_dependencies
-install_python_packages
-collect_env_variables
+packages
+install_requirements
+collect_env
+
+pprint "\n🎉 AvaRobot installation is complete!\n" "cgreen"
+pprint "You can now start the bot by running:\n" "ccyan"
+pprint "    python3 -m Ava\n\n" "cyellow"
