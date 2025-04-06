@@ -1,6 +1,20 @@
 #!/bin/bash
-    
-#git clone $REPO_URL Repo
-#cd Repo
-#pip3 install -U -r requirements.txt
+
+# =====================
+# AvaRobot Start Script
+# =====================
+
+# Check if .env exists
+if [ ! -f .env ]; then
+    echo "❌ .env file not found! Please run the setup script first."
+    exit 1
+fi
+
+# Export environment variables from .env
+export $(grep -v '^#' .env | xargs)
+
+# Optional: Log startup time
+echo "\n[$(date)] Starting AvaRobot..."
+
+# Start the bot
 python3 -m Ava
