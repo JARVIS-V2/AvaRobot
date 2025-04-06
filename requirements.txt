@@ -19,7 +19,6 @@ ffmpeg-python==0.2.0
 future==0.18.3
 gitpython==3.1.43
 geopy
-g4f
 httpx==0.27.0
 lexica-api
 langdetect
