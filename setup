@@ -1,0 +1,135 @@
+#!/bin/bash
+
+# ========== Color Printing Utility ==========
+pprint () {
+    cred='\033[0;31m'
+    cgreen='\033[0;32m'
+    cyellow='\033[0;33m'
+    cblue='\033[0;34m'
+    cmagenta='\033[0;35m'
+    ccyan='\033[0;36m'
+    creset='\033[0m'
+
+    color="$cmagenta"
+    [[ -n "$2" ]] && eval "color=\$$2"
+    printf "$color$1$creset"
+}
+
+# ========== Yes/No Prompt ==========
+yesnoprompt() {
+    old_stty_cfg=$(stty -g)
+    stty raw -echo; answer=$(head -c 1)
+    stty $old_stty_cfg
+    echo "$answer" | grep -iq "^y"
+}
+
+# ========== System Update ==========
+update() {
+    pprint "\nUpdating packages... " "ccyan"
+    sudo apt update -y &>/dev/null && sudo apt upgrade -y &>/dev/null && \
+    pprint "System updated.\n" "cgreen" || \
+    pprint "Update failed.\n" "cred"
+}
+
+# ========== Package Installation ==========
+install_dependencies() {
+    pprint "\nInstalling required packages...\n" "ccyan"
+    sudo apt install -y python3 python3-pip ffmpeg git curl &>/dev/null && \
+    pprint "Dependencies installed.\n" "cgreen" || \
+    (pprint "Failed to install packages.\n" "cred"; exit 1)
+}
+
+# ========== Python Requirements ==========
+install_python_packages() {
+    pprint "\nInstalling Python dependencies...\n" "ccyan"
+    pip3 install -U pip &>/dev/null
+    pip3 install -U -r requirements.txt &>pypilog.txt && \
+    pprint "Python packages installed.\n" "cgreen" || \
+    (pprint "Failed to install Python packages. See pypilog.txt\n" "cred"; exit 1)
+}
+
+# ========== Display Banner ==========
+display_banner() {
+    cmagenta='\033[0;35m'
+    creset='\033[0m'
+    printf "$cmagenta"
+    cat << "EOF"
+
+ █████╗ ██╗   ██╗ █████╗     ██████╗  ██████╗ ██████╗  ██████╗ ████████╗
+██╔══██╗██║   ██║██╔══██╗    ██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗╚══██╔══╝
+███████║██║   ██║███████║    ██████╔╝██║   ██║██████╔╝██║   ██║   ██║   
+██╔══██║╚██╗ ██╔╝██╔══██║    ██╔══██╗██║   ██║██╔══██╗██║   ██║   ██║   
+██║  ██║ ╚████╔╝ ██║  ██║    ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   
+╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   
+
+EOF
+    printf "$creset"
+}
+
+# ========== Variable Collector ==========
+collect_env_variables() {
+    pprint "\nPlease enter the required values below:\n" "cgreen"
+
+    pprint "API ID: " "cyellow"; read api_id
+    pprint "API HASH: " "cyellow"; read api_hash
+    pprint "BOT TOKEN: " "cyellow"; read token
+    pprint "OWNER ID: " "cyellow"; read owner_id
+    pprint "OWNER USERNAME (optional): " "cyellow"; read owner_user
+    pprint "SUPPORT CHAT (optional, no @): " "cyellow"; read support_chat
+    pprint "LOGGER GROUP ID: " "cyellow"; read logger_id
+    pprint "MONGO DB URI: " "cyellow"; read mongo_uri
+    pprint "DB NAME: " "cyellow"; read db_name
+    pprint "DATABASE URL: " "cyellow"; read db_url
+    pprint "DEEP AI API KEY (optional): " "cyellow"; read deep_api
+    pprint "ARQ API KEY: " "cyellow"; read arq_key
+    pprint "SPAMWATCH API: " "cyellow"; read spamwatch_api
+
+    pprint "\nWriting to .env file...\n" "ccyan"
+
+    cat << EOF > .env
+API_ID=$api_id
+API_HASH=$api_hash
+TOKEN=$token
+OWNER_ID=$owner_id
+OWNER_USERNAME=$owner_user
+SUPPORT_CHAT=$support_chat
+LOGGER_ID=$logger_id
+MONGO_DB_URI=$mongo_uri
+DB_NAME=$db_name
+DATABASE_URL=$db_url
+DEEP_API=$deep_api
+ARQ_API_KEY=$arq_key
+SPAMWATCH_API=$spamwatch_api
+EOF
+
+    pprint "\n✅ .env file created successfully!\n" "cgreen"
+
+    # ========== .env Validation ==========
+    pprint "\nChecking .env file for required fields...\n" "ccyan"
+    missing_vars=()
+    for var in API_ID API_HASH TOKEN OWNER_ID LOGGER_ID MONGO_DB_URI DB_NAME DATABASE_URL ARQ_API_KEY SPAMWATCH_API; do
+        if ! grep -q "$var=" .env || [ -z "$(grep "$var=" .env | cut -d'=' -f2)" ]; then
+            missing_vars+=("$var")
+        fi
+    done
+
+    if [ ${#missing_vars[@]} -ne 0 ]; then
+        pprint "\n⚠️ Missing required environment variables:\n" "cred"
+        for var in "${missing_vars[@]}"; do
+            pprint "$var\n" "cyellow"
+        done
+        pprint "\nPlease edit the .env file and add the missing values.\n" "cyellow"
+    else
+        pprint "\n✅ All required variables are set. You can now start AvaRobot by running: python3 -m Ava\n" "cgreen"
+    fi
+}
+
+# ========== Execution Begins Here ==========
+clear
+sudo test || exit 1
+
+display_banner
+update
+install_dependencies
+install_python_packages
+collect_env_variables
