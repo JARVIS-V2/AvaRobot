@@ -9,8 +9,6 @@ from inspect import getfullargspec
 from os import environ
 from sys import exit as sysexit
 from traceback import format_exc
-from os import environ
-from os import environ
 
 import spamwatch
 import telegram.ext as tg
@@ -78,10 +76,9 @@ API_ID = Config.API_ID
 API_HASH = Config.API_HASH
 DEEP_API = Config.DEEP_API
 BAN_STICKER = "CAADBQAD3AcAAor_2VaLJ7V3SdP8dgI"
-REDIS_URL = Config.REDIS_URL
 SUPPORT_CHAT = Config.SUPPORT_CHAT
-MONGO_DB = "Ava"  # DON'T EDIT
-MONGO_PORT = "27017"  # DON'T EDIT
+MONGO_DB = "Ava" 
+MONGO_PORT = "27017" 
 MONGO_URI = Config.MONGO_URI
 DB_NAME = Config.DB_NAME
 BOT_API_URL = "https://api.telegram.org/bot"  # DON'T EDIT
