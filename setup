@@ -92,7 +92,7 @@ install_requirements(){
     source venv/bin/activate
 
     pprint "\nInstalling Python dependencies...\n" "ccyan"
-    pip install --upgrade pip &>>pypilog.txt
+    pip install --upgrade pip setuptools wheel &>>pypilog.txt
     pip install -r requirements.txt &>>pypilog.txt &&
     pprint "Dependencies installed.\n" "cgreen" || (pprint "FAILED\n" "cred"; exit 1)
 }
