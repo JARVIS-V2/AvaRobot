@@ -44,8 +44,8 @@ class Config(object):
     # ==========================
 
     DEEP_API = getenv("DEEP_API", "")             # Get from https://deepai.org/
-    ARQ_API_KEY = getenv("ARQ_API_KEY", "")       # Get from https://arq.hamker.dev/
-    SPAMWATCH_API = getenv("SPAMWATCH_API", "")   # Get from https://spamwatch.org (optional)
+    ARQ_API_KEY = getenv("ARQ_API_KEY", "")       # Get from https://t.me/ARQRobot
+    SPAMWATCH_API = getenv("SPAMWATCH_API", "")   # Get from https://t.me/SpamWatchBot
 
 
 class Production(Config):
