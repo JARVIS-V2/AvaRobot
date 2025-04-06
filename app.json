@@ -60,16 +60,16 @@
     },
     "DEEP_API": {
       "description": "API key from https://deepai.org/",
-      "required": true,
+      "required": false,
       "value": ""
     },
     "ARQ_API_KEY": {
-      "description": "Get from https://arq.hamker.dev",
+      "description": "Get from https://t.me/ARQRobot",
       "required": true,
       "value": ""
     },
     "SPAMWATCH_API": {
-      "description": "API key from https://spamwatch.org",
+      "description": "API key from https://t.me/SpamWatchBot",
       "required": true,
       "value": ""
     }
