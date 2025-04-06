@@ -78,7 +78,7 @@ collect_env_variables() {
     pprint "SUPPORT CHAT (optional, no @): " "cyellow"; read support_chat
     pprint "LOGGER GROUP ID: " "cyellow"; read logger_id
     pprint "MONGO DB URI: " "cyellow"; read mongo_uri
-    pprint "DB NAME: " "cyellow"; read db_name
+    pprint "DB NAME (optional): " "cyellow"; read db_name
     pprint "DATABASE URL: " "cyellow"; read db_url
     pprint "DEEP AI API KEY (optional): " "cyellow"; read deep_api
     pprint "ARQ API KEY: " "cyellow"; read arq_key
@@ -107,7 +107,7 @@ EOF
     # ========== .env Validation ==========
     pprint "\nChecking .env file for required fields...\n" "ccyan"
     missing_vars=()
-    for var in API_ID API_HASH TOKEN OWNER_ID LOGGER_ID MONGO_DB_URI DB_NAME DATABASE_URL ARQ_API_KEY SPAMWATCH_API; do
+    for var in API_ID API_HASH TOKEN OWNER_ID LOGGER_ID MONGO_DB_URI DATABASE_URL ARQ_API_KEY SPAMWATCH_API; do
         if ! grep -q "$var=" .env || [ -z "$(grep "$var=" .env | cut -d'=' -f2)" ]; then
             missing_vars+=("$var")
         fi
