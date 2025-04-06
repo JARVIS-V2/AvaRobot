@@ -1,80 +1,77 @@
 {
-  "name": "ᴀᴠᴀʀᴏʙᴏᴛ",
-  "description": "Telegram Group Management Bot Written In Python Using python-telegram-bot.",
+  "name": "AvaRobot",
+  "description": "Telegram Group Management Bot built with python-telegram-bot and Pyrogram.",
   "repository": "https://github.com/CertifiedCoders/AvaRobot",
   "logo": "https://telegra.ph/file/61296490da95c55a1d5ee.jpg",
-  "keywords": [
-    "python3",
-    "telegram",
-    "bot",
-    "AvaRobot",
-    "telegram-bot",
-    "management",
-    "ptb",
-    "pyrogram"
-  ],
-  "buildpacks": [
-    {
-      "url": "https://github.com/heroku/heroku-buildpack-python"
-    },
-    {
-      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-    }
-  ],
+  "keywords": ["python", "telegram", "bot", "AvaRobot", "management", "telethon", "pyrogram"],
   "stack": "heroku-24",
+  "buildpacks": [
+    { "url": "heroku/python" },
+    { "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest" }
+  ],
   "addons": [
     {
+      "plan": "heroku-postgresql",
       "options": {
         "version": "14"
-      },
-      "plan": "heroku-postgresql"
+      }
     }
   ],
   "env": {
     "API_ID": {
-      "description": "ɢᴇᴛ ᴛʜɪs ᴠᴀʟᴜᴇ ғʀᴏᴍ my.telegram.org/apps.",
+      "description": "Get this from https://my.telegram.org/apps",
       "required": true,
       "value": ""
     },
     "API_HASH": {
-      "description": "ɢᴇᴛ ᴛʜɪs ᴠᴀʟᴜᴇ ғʀᴏᴍ my.telegram.org/apps.",
+      "description": "Get this from https://my.telegram.org/apps",
+     "required": true,
+      "value": ""
+    },
+    "TOKEN": {
+      "description": "Get bot token from @BotFather",
       "required": true,
       "value": ""
     },
     "OWNER_ID": {
-      "description": "ʏᴏᴜʀ ᴜsᴇʀ ID ᴀs ᴀɴ ɪɴᴛᴇɢᴇʀ.",
-      "required": true,
-      "value": "7044783841"
-    },
-    "DEV_USERS": {
-      "description": "ᴅᴇᴠs ᴜsᴇʀ ID ᴀs ᴀɴ ɪɴᴛᴇɢᴇʀ.",
+      "description": "Your Telegram user ID",
       "required": true,
       "value": "7044783841"
     },
     "OWNER_USERNAME": {
-      "description": "ʏᴏᴜʀ ᴛɢ ᴜsᴇʀɴᴀᴍᴇ",
+      "description": "Your Telegram username",
       "required": true,
-      "value": "JARVIS_V2"
+      "value": "CertifiedCoder"
     },
     "LOGGER_ID": {
-      "description": "ᴇᴠᴇɴᴛ ʟᴏɢs ᴄʜᴀɴɴᴇʟ  ᴛᴏ ɴᴏᴛᴇ ᴅᴏᴡɴ ɪᴍᴘᴏʀᴛᴀɴᴛ ʙᴏᴛ ʟᴇᴠᴇʟ ᴇᴠᴇɴᴛs, ᴇx: '-10023456'",
+      "description": "Channel or group ID to receive log messages",
       "required": true,
       "value": ""
+    },
+    "SUPPORT_CHAT": {
+      "description": "Public support group username (no @)",
+      "required": false,
+      "value": "CertifiedCoders"
     },
     "MONGO_DB_URI": {
-      "description": "ʀᴇǫᴜɪʀᴇᴅ ғᴏʀ ᴅᴀᴛᴀʙᴀsᴇ ᴄᴏɴɴᴇᴄᴛɪᴏɴs (ᴍᴏɴɢᴏ).",
-      "required": true,
-      "value": ""
-    },
-    "TOKEN": {
-      "description": "Get bot token from @BotFather on TG",
+      "description": "MongoDB connection string",
       "required": true,
       "value": ""
     },
     "DEEP_API": {
-      "description": "Your DEEP API key from https://deepai.org/",
-      "value": "",
-      "required": false
+      "description": "API key from https://deepai.org/",
+      "required": true,
+      "value": ""
+    },
+    "ARQ_API_KEY": {
+      "description": "Get from https://arq.hamker.dev",
+      "required": true,
+      "value": ""
+    },
+    "SPAMWATCH_API": {
+      "description": "API key from https://spamwatch.org",
+      "required": true,
+      "value": ""
     }
   }
 }
