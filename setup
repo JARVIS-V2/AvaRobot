@@ -24,6 +24,22 @@ yesnoprompt(){
     echo "$answer" | grep -iq "^y"
 }
 
+check_python_version(){
+    if ! command -v python3 &>/dev/null; then
+        pprint "\nPython3 is not installed.\n" "cred"
+        exit 1
+    fi
+
+    version=$(python3 -c 'import sys; print("{}.{}".format(sys.version_info[0], sys.version_info[1]))')
+    required="3.7"
+    if [[ $(echo -e "$version\n$required" | sort -V | head -n1) != "$required" ]]; then
+        pprint "\nPython 3.7 or higher is required. Detected: $version\n" "cred"
+        exit 1
+    else
+        pprint "\nPython version $version is compatible.\n" "cgreen"
+    fi
+}
+
 update() {
     pprint "\n\nChecking for package updates... " "ccyan"
     sudo apt update 2>&1 | grep "can be upgraded" &>/dev/null
@@ -57,13 +73,23 @@ packages(){
         pprint "SUCCESS\n" "cgreen" || (pprint "FAIL. Install ffmpeg manually.\n" "cred"; exit 1)
     fi
 
-    sudo apt install -y git curl python3-venv &>/dev/null
+    if ! python3 -m venv --help &>/dev/null; then
+        pprint "Installing python3-venv... " "ccyan"
+        sudo apt install python3-venv -y &>/dev/null &&
+        pprint "SUCCESS\n" "cgreen" || (pprint "FAIL\n" "cred"; exit 1)
+    fi
+
+    sudo apt install -y git curl &>/dev/null
 }
 
 install_requirements(){
-    pprint "\nCreating Python virtual environment...\n" "ccyan"
-    python3 -m venv venv && source venv/bin/activate &&
-    pprint "Virtual environment created.\n" "cgreen"
+    pprint "\nSetting up Python virtual environment...\n" "ccyan"
+    if [ ! -d "venv" ]; then
+        python3 -m venv venv && pprint "Virtual environment created.\n" "cgreen"
+    else
+        pprint "Existing virtual environment found.\n" "cyellow"
+    fi
+    source venv/bin/activate
 
     pprint "\nInstalling Python dependencies...\n" "ccyan"
     pip install --upgrade pip &>>pypilog.txt
@@ -96,7 +122,14 @@ collect_env(){
     pprint "API ID: " "cyellow"; read api_id
     pprint "API HASH: " "cyellow"; read api_hash
     pprint "BOT TOKEN: " "cyellow"; read token
-    pprint "OWNER ID: " "cyellow"; read owner_id
+
+    while true; do
+        pprint "OWNER ID (digits only): " "cyellow"; read owner_id
+        if [[ "$owner_id" =~ ^[0-9]+$ ]]; then break; else
+            pprint "Invalid input. Must be numeric.\n" "cred"
+        fi
+    done
+
     pprint "OWNER USERNAME (optional): " "cyellow"; read owner_user
     pprint "SUPPORT CHAT (optional): " "cyellow"; read support_chat
     pprint "LOGGER GROUP ID: " "cyellow"; read logger_id
@@ -141,6 +174,7 @@ pprint "\nWelcome to AvaRobot Setup\n\n" "cgreen"
 pprint "This script needs sudo privileges to install packages.\n" "ccyan"
 sudo test
 
+check_python_version
 update
 packages
 install_requirements
