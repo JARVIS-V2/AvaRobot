@@ -37,43 +37,43 @@ AvaRobot is a fast, modular, and fully-featured Telegram group management bot wr
 
 ---
 
-## 🛠️ VPS Deployment (Ubuntu 20.04+ or 22.04)
+## 💻 Deploy on VPS / Localhost
 
-### 📁 Step-by-step guide
+### ⚙️ Requirements
 
 ```bash
-# 1. Install system dependencies
-sudo apt update && sudo apt install git curl python3 python3-pip ffmpeg tmux -y
+sudo apt update && sudo apt install git curl python3-pip ffmpeg -y
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+source ~/.bashrc && nvm install node
+sudo apt install nodejs -y && sudo pip3 install -U pip && npm i -g npm
+```
 
-# 2. Clone the repository
-git clone https://github.com/JARVIS-V2/AvaRobot
+### 📀 Installation
+
+```bash
+git clone https://github.com/CertifiedCoders/AvaRobot
 cd AvaRobot
-
-# 3. Install Python requirements
-pip3 install -U pip
 pip3 install -U -r requirements.txt
+```
 
-# 4. Run the setup script
-chmod +x setup
-./setup
-# Fill all required values when prompted (skip optional ones)
+### ⚙️ Optional Utilities
 
-# 5. Start tmux session (optional for persistent run)
+```bash
+sudo apt install tmux nano
 tmux new -s avarobot
-
-# 6. Launch the bot
-chmod +x start
-./start
 ```
 
-To detach from tmux:
+### 🚀 Launch
+
 ```bash
-Ctrl + B then press D
+sudo bash setup   # Configure environment variables
+tmux new -s avarobot
+sudo bash start         # Launch the bot
 ```
 
-To stop:
+**To detach from tmux:**
 ```bash
-tmux kill-session -t avarobot
+Ctrl + b then d
 ```
 
 ---
@@ -122,14 +122,13 @@ tmux kill-session -t avarobot
 
 ---
 #  🌐 𝗦𝗨𝗣𝗣𝗢𝗥𝗧
- 
 
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/_rajnish_mishra____) 
 [![Telegram](https://img.shields.io/badge/Telegram-%232671E5.svg?logo=Telegram&logoColor=white)](https://t.me/CertifiedNetwork) 
 [![Gmail](https://img.shields.io/badge/Gmail-%23F05033.svg?logo=Gmail&logoColor=white)](https://mail.google.com/mail/?view=cm&fs=1&to=hackerdoraemon2@gmail.com) 
 [![YouTube](https://img.shields.io/badge/Youtube-%23DD0031.svg?logo=Youtube&logoColor=white)](https://youtube.com/@rajnisha3) 
 
-
 ## 💎 License
 
 Licensed under the [GNU General Public License v3.0](LICENSE)
+
