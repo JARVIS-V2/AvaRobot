@@ -1,7 +1,7 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 <h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?color=F778A1&width=350&lines=🧳+AVA+THE+ROBOT🖤+🦍">
+  <img src="https://readme-typing-svg.herokuapp.com?color=F778A1&width=350&lines=🧳+𝗔𝗩𝗔+𝗧𝗛𝗘+𝗥𝗢𝗕𝗢𝗧🖤+🥀">
 </h1>
 
 <p align="center">
@@ -103,8 +103,8 @@ tmux kill-session -t avarobot
 | `LOGGER_ID`      | ✅       | Telegram log group/channel ID                |
 | `MONGO_DB_URI`   | ✅       | MongoDB connection string                    |
 | `DATABASE_URL`   | ✅       | PostgreSQL connection string (if using SQL)  |
-| `ARQ_API_KEY`    | ✅       | From [ARQ](https://t.me/ARQRobot) |
-| `SPAMWATCH_API`  | ✅       | From [Spam Watchers](https://t.me/SpamWatchBot)   |
+| `ARQ_API_KEY`    | ✅       | From [arq.hamker.dev](https://t.me/ARQRobot) |
+| `SPAMWATCH_API`  | ✅       | From [spamwatch.org](https://t.me/SpamWatchBot)   |
 | `OWNER_USERNAME` | 🔹       | Your @username (used in UI, optional)        |
 | `SUPPORT_CHAT`   | 🔹       | Support chat link (used in /help)            |
 | `DEEP_API`       | 🔹       | From [deepai.org](https://deepai.org)        |
@@ -121,6 +121,14 @@ tmux kill-session -t avarobot
 - [SpamWatch](https://spamwatch.org/)
 
 ---
+#  🌐 𝗦𝗨𝗣𝗣𝗢𝗥𝗧
+ 
+
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/_rajnish_mishra____) 
+[![Telegram](https://img.shields.io/badge/Telegram-%232671E5.svg?logo=Telegram&logoColor=white)](https://t.me/CertifiedNetwork) 
+[![Gmail](https://img.shields.io/badge/Gmail-%23F05033.svg?logo=Gmail&logoColor=white)](https://mail.google.com/mail/?view=cm&fs=1&to=hackerdoraemon2@gmail.com) 
+[![YouTube](https://img.shields.io/badge/Youtube-%23DD0031.svg?logo=Youtube&logoColor=white)](https://youtube.com/@rajnisha3) 
+
 
 ## 💎 License
 
